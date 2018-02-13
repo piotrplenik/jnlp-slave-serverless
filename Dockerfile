@@ -44,6 +44,7 @@ RUN apt-get update -qqy \
     less nano tree \
     jq \
     python3.6 \
+    python3.6-dev \
     python3-pip \
   && rm -rf /var/lib/apt/lists/* \
   && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
@@ -52,7 +53,7 @@ RUN apt-get update -qqy \
 RUN [ -f "/etc/ssl/certs/java/cacerts" ] || /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
 # workaround "You are using pip version 8.1.1, however version 9.0.1 is available."
-RUN pip3 install --upgrade pip setuptools
+RUN python3.6 -m pip install --upgrade pip setuptools
 
 #====================================
 # NODE JS
