@@ -28,7 +28,8 @@ RUN DISTRIB_CODENAME=$(cat /etc/*release* | grep DISTRIB_CODENAME | cut -f2 -d'=
 
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
-  && add-apt-repository -y ppa:git-core/ppa
+  && add-apt-repository -y ppa:git-core/ppa \
+  && add-apt-repository ppa:jonathonf/python-3.6
 
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install \
@@ -42,7 +43,7 @@ RUN apt-get update -qqy \
     build-essential \
     less nano tree \
     jq \
-    python3 \
+    python3.6 \
     python3-pip \
   && rm -rf /var/lib/apt/lists/* \
   && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
